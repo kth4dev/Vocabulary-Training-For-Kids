@@ -28,7 +28,6 @@ public class HomeFragment extends Fragment{
             @Override
             public void onClick(View v) {
                 Menu_Dialog sent = new Menu_Dialog(getContext());
-                sent.setCancelable(false);
                 sent.getWindow().setBackgroundDrawableResource(android.R.color.transparent);
                 sent.show();
             }
