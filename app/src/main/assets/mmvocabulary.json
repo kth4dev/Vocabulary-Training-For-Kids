@@ -1,0 +1,18 @@
+{
+  "fruits": [
+    {
+      "true_ans":"Apple",
+      "meaning":"pan thee",
+      "false_ans_1": "Orange",
+      "false_ans_2": "Mango",
+      "false_ans_3": "Papaya"
+    },
+    {
+      "true_ans":"Orange",
+      "meaning":"lainmaw thee",
+      "false_ans_1": "Coconut",
+      "false_ans_2": "Mango",
+      "false_ans_3": "Papaya"
+    }
+          ]
+}

@@ -5,12 +5,17 @@ import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
+
 import androidx.annotation.NonNull;
 import androidx.cardview.widget.CardView;
 import androidx.fragment.app.Fragment;
+import androidx.navigation.NavController;
+import androidx.navigation.Navigation;
 
 import kyawthiha.kt.vocabularytrainingforkids.R;
 import kyawthiha.kt.vocabularytrainingforkids.custom_dialog.Menu_Dialog;
+import kyawthiha.kt.vocabularytrainingforkids.helper.MyHelper;
 
 public class HomeFragment extends Fragment{
 
@@ -27,7 +32,7 @@ public class HomeFragment extends Fragment{
     category_fruits.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Menu_Dialog sent = new Menu_Dialog(getContext());
+                Menu_Dialog sent = new Menu_Dialog(getContext(), Navigation.findNavController(v));
                 sent.getWindow().setBackgroundDrawableResource(android.R.color.transparent);
                 sent.show();
             }
@@ -35,7 +40,7 @@ public class HomeFragment extends Fragment{
         category_animals.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                Navigation.findNavController(v).navigate(R.id.action_to_learning);
             }
         });
         return root;

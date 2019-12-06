@@ -25,6 +25,7 @@
             <LinearLayout
                 style="@style/category_inner_linear">
                 <ImageView
+                    android:id="@+id/fruits_img"
                     style="@style/category_img_style"
                     android:src="@drawable/fruits" />
                 <TextView
