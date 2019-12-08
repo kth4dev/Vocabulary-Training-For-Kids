@@ -22,6 +22,8 @@ import androidx.appcompat.widget.Toolbar;
 
 import android.view.Menu;
 
+import net.gotev.speech.Speech;
+
 public class MainActivity extends AppCompatActivity {
 
     private AppBarConfiguration mAppBarConfiguration;
@@ -33,6 +35,7 @@ public class MainActivity extends AppCompatActivity {
         activity=this;
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+        Speech.init(this, getPackageName());
         DrawerLayout drawer = findViewById(R.id.drawer_layout);
         NavigationView navigationView = findViewById(R.id.nav_view);
         // Passing each menu ID as a set of Ids because each
@@ -59,6 +62,13 @@ public class MainActivity extends AppCompatActivity {
         NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment);
         return NavigationUI.navigateUp(navController, mAppBarConfiguration)
                 || super.onSupportNavigateUp();
+    }
+
+    @Override
+    protected void onDestroy() {
+        // prevent memory leaks when activity is destroyed
+        super.onDestroy();
+        Speech.getInstance().shutdown();
     }
 
 

@@ -68,6 +68,7 @@
           </LinearLayout>
        </androidx.cardview.widget.CardView>
        <androidx.cardview.widget.CardView
+           android:id="@+id/btn_writing"
            android:layout_margin="10dp"
            android:layout_width="match_parent"
            android:layout_height="40dp">
@@ -94,6 +95,7 @@
        </androidx.cardview.widget.CardView>
 
        <androidx.cardview.widget.CardView
+           android:id="@+id/btn_listening"
            android:layout_margin="10dp"
            android:layout_width="match_parent"
            android:layout_height="40dp">

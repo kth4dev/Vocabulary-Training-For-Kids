@@ -13,6 +13,13 @@
       "false_ans_1": "Coconut",
       "false_ans_2": "Mango",
       "false_ans_3": "Papaya"
+    },
+    {
+      "true_ans":"Animals",
+      "meaning":"ta yait san",
+      "false_ans_1": "Coconut",
+      "false_ans_2": "Mango",
+      "false_ans_3": "Papaya"
     }
           ]
 }

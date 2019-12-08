@@ -12,6 +12,8 @@
         tools:layout="@layout/fragment_home" >
         <action android:id="@+id/action_to_learning"
             app:destination="@+id/learningFragment"/>
+        <action android:id="@+id/action_to_writing"
+            app:destination="@+id/writingFragment"/>
     </fragment>
 
     <fragment
@@ -46,7 +48,13 @@
 
     <fragment
         android:id="@+id/learningFragment"
-        android:name="kyawthiha.kt.vocabularytrainingforkids.ui.appactivity.Learning_fragment"
+        android:name="kyawthiha.kt.vocabularytrainingforkids.ui.appactivity.LearningFragment"
         android:label="Learning"
         tools:layout="@layout/fragment_learning" />
+
+    <fragment
+        android:id="@+id/writingFragment"
+        android:name="kyawthiha.kt.vocabularytrainingforkids.ui.appactivity.WritingFragment"
+        android:label="Writing"
+        tools:layout="@layout/fragment_writing" />
 </navigation>

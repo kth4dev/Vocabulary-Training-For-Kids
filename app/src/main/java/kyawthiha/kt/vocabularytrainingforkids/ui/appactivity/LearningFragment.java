@@ -22,9 +22,9 @@ import kyawthiha.kt.vocabularytrainingforkids.helper.JsonHelper;
 import kyawthiha.kt.vocabularytrainingforkids.helper.MyHelper;
 
 
-public class Learning_fragment extends Fragment {
+public class LearningFragment extends Fragment {
 
-    public Learning_fragment() {
+    public LearningFragment() {
         // Required empty public constructor
     }
 

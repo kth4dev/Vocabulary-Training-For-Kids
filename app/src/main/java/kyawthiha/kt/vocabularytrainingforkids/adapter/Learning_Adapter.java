@@ -14,7 +14,10 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import net.gotev.speech.Speech;
+
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.Locale;
 
 import kyawthiha.kt.vocabularytrainingforkids.R;
@@ -52,6 +55,7 @@ public class Learning_Adapter extends RecyclerView.Adapter<Learning_Adapter.View
                 @Override
                 public void onClick(View v) {
                     speakOut(cdata.getTrueAns());
+                    //Speech.getInstance().say(cdata.getTrueAns());
                 }
             });
 
@@ -68,22 +72,11 @@ public class Learning_Adapter extends RecyclerView.Adapter<Learning_Adapter.View
 
     @Override
     public void onInit(int status) {
-
         if (status == TextToSpeech.SUCCESS) {
-
-            int result = tts.setLanguage(Locale.US);
-
-            if (result == TextToSpeech.LANG_MISSING_DATA
-                    || result == TextToSpeech.LANG_NOT_SUPPORTED) {
-                Log.e("TTS", "Language is not supported");
-            } else {
-                    speakOut("");
-            }
-
+            tts.setLanguage(Locale.US);
         } else {
             Log.e("TTS", "Initilization Failed");
         }
-
     }
 
     private void speakOut(String text) {

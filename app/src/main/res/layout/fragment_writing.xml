@@ -1,0 +1,196 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:context=".ui.appactivity.WritingFragment"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:id="@+id/playground"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+    <LinearLayout
+      android:padding="10dp"
+        android:layout_marginTop="10dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+        <LinearLayout
+            android:background="@color/colorPrimary"
+            android:layout_weight="0.8"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="horizontal">
+            <ImageView
+                android:layout_gravity="center_vertical"
+                android:layout_margin="5dp"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:src="@drawable/ic_true"/>
+            <TextView
+                android:id="@+id/tv_ture_score"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:paddingLeft="5dp"
+                android:gravity="center"
+                android:textColor="@color/white"
+                android:textSize="30dp"
+                android:text="30"
+                />
+
+        </LinearLayout>
+        <TextView
+            android:id="@+id/tv_windicator"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="2/10"
+            android:padding="@dimen/category_font_size"
+            />
+        <LinearLayout
+            android:background="@color/red"
+            android:layout_weight="0.8"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="horizontal">
+            <ImageView
+                android:layout_gravity="center_vertical"
+                android:layout_margin="5dp"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:src="@drawable/ic_false"/>
+            <TextView
+                android:id="@+id/tv_false_score"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:paddingLeft="5dp"
+                android:gravity="center"
+                android:textColor="@color/white"
+                android:textSize="30dp"
+                android:text="30"
+                />
+        </LinearLayout>
+
+    </LinearLayout>
+
+
+
+    <androidx.cardview.widget.CardView
+        android:layout_marginTop="20dp"
+        android:layout_width="200dp"
+        android:layout_height="190dp"
+        android:layout_gravity="center_horizontal">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+            <ImageView
+                android:id="@+id/iv_wimg"
+                android:layout_width="150dp"
+                android:layout_height="150dp"
+                android:layout_gravity="center_horizontal"
+                android:src="@drawable/apple"
+                android:scaleType="centerCrop"/>
+            <TextView
+                android:gravity="center"
+                android:id="@+id/tv_wmeaning"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:text="Pan Three"
+                android:textSize="@dimen/category_font_size"
+                />
+        </LinearLayout>
+
+    </androidx.cardview.widget.CardView>
+
+
+
+
+
+
+        <EditText
+            android:id="@+id/et_wanswer"
+            android:focusable="true"
+            android:textCursorDrawable="@drawable/mycursor"
+            android:textColor="@color/colorPrimary"
+            android:background="@drawable/for_edittext"
+            android:layout_gravity="center"
+            android:layout_width="250dp"
+            android:layout_height="wrap_content"
+            android:padding="@dimen/category_font_size"
+            android:layout_marginLeft="25dp"
+            android:layout_marginRight="25dp"
+            android:layout_marginTop="15dp"
+            android:hint="Type Here"
+            />
+
+    <Button
+        android:id="@+id/btn_wnext"
+        android:layout_marginTop="15dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Next"
+        android:background="@drawable/corner_radius"
+        android:textColor="@color/white"
+        android:layout_gravity="center"/>
+
+    </LinearLayout>
+
+
+    <LinearLayout
+        android:visibility="gone"
+        android:id="@+id/ll_wresultboard"
+        android:background="#B2000000"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+    <androidx.cardview.widget.CardView
+        android:layout_marginLeft="30dp"
+        android:layout_marginRight="30dp"
+        android:layout_marginTop="100dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:cardCornerRadius="15dp"
+       >
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:padding="25dp"
+            android:orientation="vertical">
+            <ImageView
+                android:layout_gravity="center_horizontal"
+                android:layout_width="100dp"
+                android:layout_height="100dp"
+                android:src="@drawable/ic_trophy"/>
+            <TextView
+                android:layout_marginTop="10dp"
+                android:layout_gravity="center_horizontal"
+                android:layout_width="wrap_content"
+                android:text="Congragulation"
+                android:textSize="25dp"
+                android:layout_height="wrap_content"
+                />
+            <TextView
+                android:id="@+id/tv_wfinalresult"
+                android:textColor="@color/colorPrimary"
+                android:layout_marginTop="10dp"
+                android:layout_gravity="center_horizontal"
+                android:layout_width="wrap_content"
+                android:text="Your Score :  "
+                android:textSize="25dp"
+                android:layout_height="wrap_content"
+                android:src="@drawable/ic_trophy"/>
+
+
+        </LinearLayout>
+
+    </androidx.cardview.widget.CardView>
+    </LinearLayout>
+
+
+</RelativeLayout>
