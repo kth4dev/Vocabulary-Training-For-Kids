@@ -46,13 +46,29 @@
                 android:gravity="right"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
-                <ImageView
-                    android:layout_marginRight="20dp"
-                    android:padding="4dp"
-                    android:layout_width="40dp"
-                    android:layout_height="40dp"
-                    android:background="@drawable/circle"
-                    android:src="@drawable/ic_favorite"/>
+                <RelativeLayout
+                    android:id="@+id/btn_fav"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content">
+                    <ImageView
+                        android:id="@+id/fav_before"
+                        android:layout_marginRight="20dp"
+                        android:padding="4dp"
+                        android:layout_width="40dp"
+                        android:layout_height="40dp"
+                        android:background="@drawable/circle"
+                        android:src="@drawable/ic_favorite"/>
+                    <ImageView
+                        android:id="@+id/fav_after"
+                        android:visibility="gone"
+                        android:layout_marginRight="20dp"
+                        android:padding="4dp"
+                        android:layout_width="40dp"
+                        android:layout_height="40dp"
+                        android:background="@drawable/circle"
+                        android:src="@drawable/ic_favorited"/>
+                </RelativeLayout>
+
                 <ImageButton
                     android:id="@+id/iv_lsound"
                     android:padding="4dp"

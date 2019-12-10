@@ -21,8 +21,11 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
 import android.view.Menu;
+import android.widget.TextView;
+import android.widget.Toast;
 
-import net.gotev.speech.Speech;
+
+import kyawthiha.kt.vocabularytrainingforkids.helper.MyHelper;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -35,25 +38,32 @@ public class MainActivity extends AppCompatActivity {
         activity=this;
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-        Speech.init(this, getPackageName());
+
         DrawerLayout drawer = findViewById(R.id.drawer_layout);
         NavigationView navigationView = findViewById(R.id.nav_view);
+        View headerView = navigationView.getHeaderView(0);
+        TextView navprofile = (TextView) headerView.findViewById(R.id.profile_img);
+        TextView navUsername = (TextView) headerView.findViewById(R.id.profile_username);
+        String u_name=MyHelper.getSavingString(getApplicationContext(),"USER_NAME");
+        navUsername.setText(u_name);
+        navprofile.setText(String.valueOf(u_name.charAt(0)).toUpperCase());
         // Passing each menu ID as a set of Ids because each
         // menu should be considered as top level destinations.
         mAppBarConfiguration = new AppBarConfiguration.Builder(
-                R.id.nav_home, R.id.nav_gallery, R.id.nav_slideshow,
+                R.id.nav_home, R.id.nav_fav, R.id.nav_slideshow,
                 R.id.nav_tools, R.id.nav_share, R.id.nav_send)
                 .setDrawerLayout(drawer)
                 .build();
         NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment);
         NavigationUI.setupActionBarWithNavController(this, navController, mAppBarConfiguration);
         NavigationUI.setupWithNavController(navigationView, navController);
+
+
     }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.main, menu);
         return true;
     }
 
@@ -64,12 +74,7 @@ public class MainActivity extends AppCompatActivity {
                 || super.onSupportNavigateUp();
     }
 
-    @Override
-    protected void onDestroy() {
-        // prevent memory leaks when activity is destroyed
-        super.onDestroy();
-        Speech.getInstance().shutdown();
-    }
+
 
 
 }

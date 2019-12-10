@@ -12,6 +12,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 
@@ -42,7 +43,7 @@ public class LearningFragment extends Fragment {
         View view= inflater.inflate(R.layout.fragment_learning, container, false);
         RecyclerView learning_rv=view.findViewById(R.id.learning_recyclerview);
         ArrayList<V_Data> ary=new ArrayList<>();
-        ary= JsonHelper.getData("fruits",getActivity());
+        ary= JsonHelper.getData(getArguments().getString("category_name"),getActivity());
         Learning_Adapter adapter=new Learning_Adapter(getContext(),ary);
         learning_rv.setAdapter(adapter);
         learning_rv.setLayoutManager(new LinearLayoutManager(getContext()));

@@ -8,13 +8,14 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-import net.gotev.speech.Speech;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -22,6 +23,7 @@ import java.util.Locale;
 
 import kyawthiha.kt.vocabularytrainingforkids.R;
 import kyawthiha.kt.vocabularytrainingforkids.data.V_Data;
+import kyawthiha.kt.vocabularytrainingforkids.helper.DataBaseHelper;
 import kyawthiha.kt.vocabularytrainingforkids.helper.MyHelper;
 
 
@@ -29,6 +31,7 @@ public class Learning_Adapter extends RecyclerView.Adapter<Learning_Adapter.View
     ArrayList<V_Data> ary=new ArrayList<>();
     Context context;
     private TextToSpeech tts;
+
     public Learning_Adapter(Context c, ArrayList<V_Data> aryy){
         ary.clear();
         ary.addAll(aryy);
@@ -46,7 +49,7 @@ public class Learning_Adapter extends RecyclerView.Adapter<Learning_Adapter.View
 
 
     @Override
-    public void onBindViewHolder(@NonNull ViewHolder viewHolder, int i) {
+    public void onBindViewHolder(@NonNull final ViewHolder viewHolder, int i) {
             final V_Data cdata=ary.get(i);
             viewHolder.img.setImageDrawable(MyHelper.getImageResource(context,cdata.getTrueAns().toLowerCase()));
             viewHolder.title.setText(cdata.getTrueAns());
@@ -55,7 +58,43 @@ public class Learning_Adapter extends RecyclerView.Adapter<Learning_Adapter.View
                 @Override
                 public void onClick(View v) {
                     speakOut(cdata.getTrueAns());
-                    //Speech.getInstance().say(cdata.getTrueAns());
+                }
+            });
+
+            boolean favcheck=false;
+            final DataBaseHelper db=new DataBaseHelper(context);
+            ArrayList<V_Data> allfavproduct=db.getAllFavWords();
+            for(int k=0;k<allfavproduct.size();k++){
+            if(allfavproduct.get(k).getTrueAns().equals(cdata.getTrueAns())){
+                favcheck=true;
+                break;
+            } }
+            if(favcheck){
+                favourited(viewHolder);
+            }
+            else {
+                un_favourite(viewHolder);
+            }
+            viewHolder.btn_fav.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    if(viewHolder.fav_before.getVisibility()==View.VISIBLE){
+                        boolean result=db.insertData(cdata.getTrueAns(),cdata.getMeaning());
+                        if(result){
+                            Toast.makeText(v.getContext(),"Add to Favourite list!",Toast.LENGTH_SHORT).show();
+                            favourited(viewHolder);
+                        }
+                        else{
+                            Toast.makeText(v.getContext(),"Fail!",Toast.LENGTH_LONG).show();
+                            un_favourite(viewHolder);
+                        }
+                    }
+                    else{
+                        db.removeData(cdata.getTrueAns());
+                        notifyDataSetChanged();
+                        Toast.makeText(v.getContext(),"Remove from Favourite list!",Toast.LENGTH_LONG).show();
+                        un_favourite(viewHolder);
+                    }
                 }
             });
 
@@ -63,6 +102,15 @@ public class Learning_Adapter extends RecyclerView.Adapter<Learning_Adapter.View
 
 
 
+
+    }
+    private void favourited(ViewHolder viewHolder){
+        viewHolder.fav_after.setVisibility(View.VISIBLE);
+        viewHolder.fav_before.setVisibility(View.GONE);
+    }
+    private void un_favourite(ViewHolder viewHolder){
+        viewHolder.fav_after.setVisibility(View.GONE);
+        viewHolder.fav_before.setVisibility(View.VISIBLE);
     }
 
     @Override
@@ -85,14 +133,18 @@ public class Learning_Adapter extends RecyclerView.Adapter<Learning_Adapter.View
 
 
     public class ViewHolder extends RecyclerView.ViewHolder {
-        ImageView img,sound;
+        ImageView img,sound,fav_before,fav_after;
         TextView title,meaning;
+        RelativeLayout btn_fav;
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
             img=itemView.findViewById(R.id.iv_limg);
             title=itemView.findViewById(R.id.tv_ltitle);
             sound=itemView.findViewById(R.id.iv_lsound);
             meaning=itemView.findViewById(R.id.tv_lmeaning);
+            fav_before=itemView.findViewById(R.id.fav_before);
+            fav_after=itemView.findViewById(R.id.fav_after);
+            btn_fav=itemView.findViewById(R.id.btn_fav);
 
         }
     }

@@ -4,22 +4,71 @@
       "true_ans":"Apple",
       "meaning":"pan thee",
       "false_ans_1": "Orange",
-      "false_ans_2": "Mango",
-      "false_ans_3": "Papaya"
+      "false_ans_2": "Animals",
+      "false_ans_3": "Fruits"
     },
     {
       "true_ans":"Orange",
       "meaning":"lainmaw thee",
-      "false_ans_1": "Coconut",
-      "false_ans_2": "Mango",
-      "false_ans_3": "Papaya"
+      "false_ans_1": "Schoolsuplies",
+      "false_ans_2": "Animals",
+      "false_ans_3": "Apple"
     },
     {
       "true_ans":"Animals",
       "meaning":"ta yait san",
-      "false_ans_1": "Coconut",
-      "false_ans_2": "Mango",
-      "false_ans_3": "Papaya"
+      "false_ans_1": "Orange",
+      "false_ans_2": "Fruits",
+      "false_ans_3": "Apple"
+    },
+    {
+      "true_ans":"Animals",
+      "meaning":"ta yait san",
+      "false_ans_1": "Orange",
+      "false_ans_2": "Fruits",
+      "false_ans_3": "Apple"
+    },
+    {
+      "true_ans":"Animals",
+      "meaning":"ta yait san",
+      "false_ans_1": "Orange",
+      "false_ans_2": "Fruits",
+      "false_ans_3": "Apple"
+    },
+    {
+      "true_ans":"Animals",
+      "meaning":"ta yait san",
+      "false_ans_1": "Orange",
+      "false_ans_2": "Fruits",
+      "false_ans_3": "Apple"
+    },
+    {
+      "true_ans":"Animals",
+      "meaning":"ta yait san",
+      "false_ans_1": "Orange",
+      "false_ans_2": "Fruits",
+      "false_ans_3": "Apple"
+    },
+    {
+      "true_ans":"Animals",
+      "meaning":"ta yait san",
+      "false_ans_1": "Orange",
+      "false_ans_2": "Fruits",
+      "false_ans_3": "Apple"
+    },
+    {
+      "true_ans":"Animals",
+      "meaning":"ta yait san",
+      "false_ans_1": "Orange",
+      "false_ans_2": "Fruits",
+      "false_ans_3": "Apple"
+    },
+    {
+      "true_ans":"Animals",
+      "meaning":"ta yait san",
+      "false_ans_1": "Orange",
+      "false_ans_2": "Fruits",
+      "false_ans_3": "Apple"
     }
           ]
 }

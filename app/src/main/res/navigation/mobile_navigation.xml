@@ -10,23 +10,30 @@
         android:name="kyawthiha.kt.vocabularytrainingforkids.ui.home.HomeFragment"
         android:label="@string/app_name"
         tools:layout="@layout/fragment_home" >
+
         <action android:id="@+id/action_to_learning"
             app:destination="@+id/learningFragment"/>
+
         <action android:id="@+id/action_to_writing"
             app:destination="@+id/writingFragment"/>
+        <action android:id="@+id/action_to_multiplechoice"
+            app:destination="@+id/multiplechoiceFragment"/>
+        <action android:id="@+id/action_to_flashcard"
+            app:destination="@+id/flashcardFragment"/>
+
     </fragment>
 
     <fragment
-        android:id="@+id/nav_gallery"
-        android:name="kyawthiha.kt.vocabularytrainingforkids.ui.gallery.GalleryFragment"
-        android:label="@string/menu_gallery"
-        tools:layout="@layout/fragment_gallery" />
+        android:id="@+id/nav_fav"
+        android:name="kyawthiha.kt.vocabularytrainingforkids.ui.favourite.FavouriteFragment"
+        android:label="@string/menu_favourite"
+        tools:layout="@layout/fragment_favourite" />
 
     <fragment
         android:id="@+id/nav_slideshow"
-        android:name="kyawthiha.kt.vocabularytrainingforkids.ui.slideshow.SlideshowFragment"
-        android:label="@string/menu_slideshow"
-        tools:layout="@layout/fragment_slideshow" />
+        android:name="kyawthiha.kt.vocabularytrainingforkids.ui.hgihscore.HighScoreFragment"
+        android:label="@string/menu_highscore"
+        tools:layout="@layout/fragment_highscore" />
 
     <fragment
         android:id="@+id/nav_tools"
@@ -50,11 +57,33 @@
         android:id="@+id/learningFragment"
         android:name="kyawthiha.kt.vocabularytrainingforkids.ui.appactivity.LearningFragment"
         android:label="Learning"
-        tools:layout="@layout/fragment_learning" />
+        tools:layout="@layout/fragment_learning"/>
+
+
 
     <fragment
         android:id="@+id/writingFragment"
         android:name="kyawthiha.kt.vocabularytrainingforkids.ui.appactivity.WritingFragment"
         android:label="Writing"
-        tools:layout="@layout/fragment_writing" />
+        tools:layout="@layout/fragment_writing" >
+        <action android:id="@+id/action_to_home"
+            app:destination="@+id/nav_home"/>
+    </fragment>
+
+    <fragment
+        android:id="@+id/multiplechoiceFragment"
+        android:name="kyawthiha.kt.vocabularytrainingforkids.ui.appactivity.MultipleChoiceFragment"
+        android:label="Multiple Choice"
+        tools:layout="@layout/fragment_multiple_choice" >
+        <action android:id="@+id/action_to_home"
+            app:destination="@+id/nav_home"/>
+    </fragment>
+    <fragment
+        android:id="@+id/flashcardFragment"
+        android:name="kyawthiha.kt.vocabularytrainingforkids.ui.appactivity.FlashcardFragment"
+        android:label="Flash Card"
+        tools:layout="@layout/fragment_multiple_choice" >
+        <action android:id="@+id/action_to_home"
+            app:destination="@+id/nav_home"/>
+    </fragment>
 </navigation>

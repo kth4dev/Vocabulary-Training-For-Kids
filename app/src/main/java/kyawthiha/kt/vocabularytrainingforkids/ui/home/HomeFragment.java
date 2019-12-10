@@ -29,21 +29,26 @@ public class HomeFragment extends Fragment{
 
         category_fruits=root.findViewById(R.id.category_fruits);
         category_animals=root.findViewById(R.id.category_animals);
-    category_fruits.setOnClickListener(new View.OnClickListener() {
+        category_fruits.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Menu_Dialog sent = new Menu_Dialog(getContext(), Navigation.findNavController(v));
-                sent.getWindow().setBackgroundDrawableResource(android.R.color.transparent);
-                sent.show();
+                menuDialog(v,"fruits");
             }
         });
         category_animals.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Navigation.findNavController(v).navigate(R.id.action_to_learning);
+                menuDialog(v,"animals");
             }
         });
         return root;
+    }
+
+    private void menuDialog(View view,String c_name){
+        Menu_Dialog menu_dialog = new Menu_Dialog(getContext(), Navigation.findNavController(view),c_name);
+        menu_dialog.getWindow().setBackgroundDrawableResource(android.R.color.transparent);
+        menu_dialog.setCancelable(false);
+        menu_dialog.show();
     }
 
 

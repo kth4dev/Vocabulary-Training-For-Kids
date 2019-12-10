@@ -1,11 +1,10 @@
 package kyawthiha.kt.vocabularytrainingforkids.ui.appactivity;
 
-import android.content.Context;
-import android.media.Image;
-import android.net.Uri;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
+import androidx.navigation.NavController;
+import androidx.navigation.Navigation;
 
 import android.view.LayoutInflater;
 import android.view.View;
@@ -15,28 +14,28 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import java.util.ArrayList;
 
 import kyawthiha.kt.vocabularytrainingforkids.R;
+import kyawthiha.kt.vocabularytrainingforkids.custom_dialog.Result_Dialog;
 import kyawthiha.kt.vocabularytrainingforkids.data.V_Data;
 import kyawthiha.kt.vocabularytrainingforkids.helper.JsonHelper;
 import kyawthiha.kt.vocabularytrainingforkids.helper.MyHelper;
 
 public class WritingFragment extends Fragment {
-    TextView tv_ture_score,tv_false_score,tv_meaning,tv_indicator,tv_finalresult;
-    EditText et_answer;
-    Button btn_next;
-    ImageView iv_question_img;
-    LinearLayout ll_resultboard;
-    ArrayList<V_Data> question_ary=new ArrayList<>();
+    private TextView tv_ture_score,tv_false_score,tv_meaning,tv_indicator,tv_finalresult;
+    private EditText et_answer;
+    private Button btn_next;
+    private ImageView iv_question_img;
+    private LinearLayout ll_resultboard;
+    private ArrayList<V_Data> question_ary=new ArrayList<>();
 
-    int cuerrent_question=1;
-    int current_index=0;
-    int true_scorboard=0;
-    int false_scoreboard=0;
-    int question_size=0;
+    private int cuerrent_question=1;
+    private int current_index=0;
+    private int true_scorboard=0;
+    private int false_scoreboard=0;
+    private int question_size=0;
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -65,7 +64,7 @@ public class WritingFragment extends Fragment {
     }
 
     private void next(){
-        check_question();
+        checkAnswer();
         cuerrent_question+=1;
         current_index+=1;
         if(cuerrent_question==question_size){
@@ -75,18 +74,12 @@ public class WritingFragment extends Fragment {
         insertData();
     }
     private void submit(){
-     check_question();
+     checkAnswer();
      insertScore();
-     ll_resultboard.setVisibility(View.VISIBLE);
-     btn_next.setEnabled(false);
-     tv_finalresult.setText(tv_finalresult.getText().toString()+true_scorboard+"/"+question_size);
-
-
-
-
-
+     Result_Dialog result_dialog=new Result_Dialog(Navigation.findNavController(getView()),getContext(),true_scorboard,question_size,"Wfruits");
+     result_dialog.show();
     }
-    private void check_question(){
+    private void checkAnswer(){
         String user_answer=et_answer.getText().toString();
         String true_ans=question_ary.get(current_index).getTrueAns();
         if(user_answer.equalsIgnoreCase(true_ans)){
@@ -107,7 +100,7 @@ public class WritingFragment extends Fragment {
         iv_question_img=view.findViewById(R.id.iv_wimg);
         tv_finalresult=view.findViewById(R.id.tv_wfinalresult);
         ll_resultboard=view.findViewById(R.id.ll_wresultboard);
-        question_ary= JsonHelper.getData("fruits",getActivity());
+        question_ary= JsonHelper.getData(getArguments().getString("category_name"),getActivity());
         question_size=question_ary.size();
         insertData();
     }
