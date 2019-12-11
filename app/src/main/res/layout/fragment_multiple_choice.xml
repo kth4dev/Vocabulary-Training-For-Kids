@@ -4,7 +4,6 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    tools:context=".ui.appactivity.WritingFragment"
     android:orientation="vertical">
 
     <LinearLayout
@@ -89,13 +88,39 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:orientation="vertical">
-                <ImageView
-                    android:id="@+id/iv_mimg"
-                    android:layout_width="150dp"
-                    android:layout_height="150dp"
-                    android:layout_gravity="center_horizontal"
-                    android:src="@drawable/apple"
-                    android:scaleType="centerCrop"/>
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+                    <ImageView
+                        android:layout_centerHorizontal="true"
+                        android:id="@+id/iv_mimg"
+                        android:layout_width="150dp"
+                        android:layout_height="150dp"
+                        android:layout_gravity="center_horizontal"
+                        android:src="@drawable/apple"
+                        android:scaleType="centerCrop"/>
+                    <ImageView
+                        android:id="@+id/iv_mcorrect_symbol"
+                        android:visibility="gone"
+                        android:layout_centerHorizontal="true"
+                        android:layout_width="150dp"
+                        android:layout_height="150dp"
+                        android:layout_gravity="center_horizontal"
+                        android:src="@drawable/correct_symbol"
+                        android:scaleType="centerCrop"
+                        />
+                    <ImageView
+                        android:id="@+id/iv_mwrong_symbol"
+                        android:visibility="gone"
+                        android:layout_centerHorizontal="true"
+                        android:layout_width="150dp"
+                        android:layout_height="150dp"
+                        android:layout_gravity="center_horizontal"
+                        android:src="@drawable/wrong_symbol"
+                        android:scaleType="centerCrop"
+                        />
+
+                </RelativeLayout>
                 <TextView
                     android:gravity="center"
                     android:id="@+id/tv_mmeaning"
@@ -108,6 +133,7 @@
 
         </androidx.cardview.widget.CardView>
         <LinearLayout
+            android:id="@+id/all_btn_m"
             android:layout_marginTop="10dp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -167,6 +193,15 @@
 
 
         </LinearLayout>
+        <Button
+            android:id="@+id/btn_mnext"
+            android:layout_marginTop="15dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Next"
+            android:background="@drawable/corner_radius"
+            android:textColor="@color/white"
+            android:layout_gravity="center"/>
 
 
 

@@ -4,6 +4,7 @@ import android.content.Context;
 import android.net.Uri;
 import android.os.Bundle;
 
+import androidx.activity.OnBackPressedCallback;
 import androidx.fragment.app.Fragment;
 import androidx.navigation.Navigation;
 
@@ -22,6 +23,7 @@ import java.util.Collections;
 import java.util.List;
 
 import kyawthiha.kt.vocabularytrainingforkids.R;
+import kyawthiha.kt.vocabularytrainingforkids.custom_dialog.Exit_Dialog;
 import kyawthiha.kt.vocabularytrainingforkids.custom_dialog.Result_Dialog;
 import kyawthiha.kt.vocabularytrainingforkids.data.V_Data;
 import kyawthiha.kt.vocabularytrainingforkids.helper.JsonHelper;
@@ -31,16 +33,17 @@ import kyawthiha.kt.vocabularytrainingforkids.helper.MyHelper;
 public class MultipleChoiceFragment extends Fragment {
     private  TextView tv_ture_score,tv_false_score,tv_meaning,tv_indicator;
     private  Button  place_one,place_two,place_three,place_four;
-    private  ImageView iv_question_img;
+    private ImageView iv_question_img,iv_wroung_symbol,iv_correct_symbol;
     private  ArrayList<V_Data> question_ary=new ArrayList<>();
-
+    private Button btn_next;
+    private LinearLayout all_btn;
     private  int current_question=1;
     private  int current_index=0;
     private  int true_scorboard=0;
     private  int false_scoreboard=0;
     private int question_size=0;
-    private boolean isfinal=false;
 
+    private String ctype;
     public MultipleChoiceFragment() {
         // Required empty public constructor
     }
@@ -50,6 +53,17 @@ public class MultipleChoiceFragment extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        ctype=getArguments().getString("category_name");
+        OnBackPressedCallback callback = new OnBackPressedCallback(true /* enabled by default */) {
+            @Override
+            public void handleOnBackPressed() {
+                // Handle the back button event
+                Exit_Dialog exit_dialog=new Exit_Dialog(getContext(),getActivity(),  Navigation.findNavController(getView()),1);
+                exit_dialog.show();
+                exit_dialog.setCancelable(false);
+            }
+        };
+        requireActivity().getOnBackPressedDispatcher().addCallback(this, callback);
 
     }
 
@@ -62,62 +76,57 @@ public class MultipleChoiceFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 String u_ans=place_one.getText().toString();
-                if(!isfinal){
                     next(u_ans);
-                }
-                else {
-                    submit(u_ans);
-                }
+
+
             }
         });
         place_two.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 String u_ans=place_two.getText().toString();
-                if(!isfinal){
                     next(u_ans);
-                }
-                else {
-                    submit(u_ans);
-                }
+
             }
         });
         place_three.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 String u_ans=place_three.getText().toString();
-                if(!isfinal){
                     next(u_ans);
-                }
-                else {
-                    submit(u_ans);
-                }
             }
         });
         place_four.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 String u_ans=place_four.getText().toString();
-                if(!isfinal){
                     next(u_ans);
+
+            }
+        });
+        btn_next.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(btn_next.getText().toString().equalsIgnoreCase("next")){
+                    insertData();
+                }else{
+                    Result_Dialog result_dialog=new Result_Dialog(Navigation.findNavController(getView()),getContext(),true_scorboard,question_size,"m"+ctype);
+                    result_dialog.show();
+                    result_dialog.setCancelable(false);
                 }
-                else {
-                    submit(u_ans);
-                }
+
             }
         });
 
         return view;
     }
 
-    private void submit(String u_ans) {
-        checkAnswer(u_ans);
-        insertScore();
-        Result_Dialog result_dialog=new Result_Dialog(Navigation.findNavController(getView()),getContext(),true_scorboard,question_size,"Mfruits");
-        result_dialog.show();
-    }
 
     private void setUpUI(View view){
+        all_btn=view.findViewById(R.id.all_btn_m);
+        btn_next=view.findViewById(R.id.btn_mnext);
+        iv_correct_symbol=view.findViewById(R.id.iv_mcorrect_symbol);
+        iv_wroung_symbol=view.findViewById(R.id.iv_mwrong_symbol);
         tv_ture_score=view.findViewById(R.id.tv_mture_score);
         tv_false_score=view.findViewById(R.id.tv_mfalse_score);
         tv_indicator=view.findViewById(R.id.tv_mindicator);
@@ -127,31 +136,39 @@ public class MultipleChoiceFragment extends Fragment {
         place_three=view.findViewById(R.id.place_three);
         place_four=view.findViewById(R.id.place_four);
         iv_question_img=view.findViewById(R.id.iv_mimg);
-        question_ary= JsonHelper.getData(getArguments().getString("category_name"),getActivity());
+        question_ary= JsonHelper.getData(ctype,getActivity());
         question_size=question_ary.size();
         insertData();
+        insertScore();
     }
     private void next(String user_ans){
+        all_btn.setVisibility(View.GONE);
+        btn_next.setVisibility(View.VISIBLE);
         checkAnswer(user_ans);
         current_question+=1;
         current_index+=1;
-        if(current_question==question_size){
-            isfinal=true;
-        }
-        insertData();
     }
 
     private void checkAnswer(String user_ans) {
         if(user_ans.equalsIgnoreCase(question_ary.get(current_index).getTrueAns())){
             true_scorboard+=1;
+            iv_correct_symbol.setVisibility(View.VISIBLE);
         }
         else{
             false_scoreboard+=1;
+            iv_wroung_symbol.setVisibility(View.VISIBLE);
         }
+        insertScore();
     }
 
     private void insertData(){
-        insertScore();
+        if(current_question==question_size){
+            btn_next.setText("Submit");
+        }
+        all_btn.setVisibility(View.VISIBLE);
+        btn_next.setVisibility(View.GONE);
+        iv_correct_symbol.setVisibility(View.GONE);
+        iv_wroung_symbol.setVisibility(View.GONE);
         tv_indicator.setText(current_question+"/"+question_size);
         iv_question_img.setImageDrawable(MyHelper.getImageResource(getContext(),question_ary.get(current_index).getTrueAns().toLowerCase()));
         tv_meaning.setText(question_ary.get(current_index).getMeaning());

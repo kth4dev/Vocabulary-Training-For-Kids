@@ -13,13 +13,14 @@
 
         <action android:id="@+id/action_to_learning"
             app:destination="@+id/learningFragment"/>
-
         <action android:id="@+id/action_to_writing"
             app:destination="@+id/writingFragment"/>
         <action android:id="@+id/action_to_multiplechoice"
             app:destination="@+id/multiplechoiceFragment"/>
         <action android:id="@+id/action_to_flashcard"
             app:destination="@+id/flashcardFragment"/>
+        <action android:id="@+id/action_to_listening"
+            app:destination="@+id/listeningFragment"/>
 
     </fragment>
 
@@ -57,7 +58,10 @@
         android:id="@+id/learningFragment"
         android:name="kyawthiha.kt.vocabularytrainingforkids.ui.appactivity.LearningFragment"
         android:label="Learning"
-        tools:layout="@layout/fragment_learning"/>
+        tools:layout="@layout/fragment_learning">
+        <action android:id="@+id/action_to_home"
+            app:destination="@+id/nav_home"/>
+    </fragment>
 
 
 
@@ -68,6 +72,8 @@
         tools:layout="@layout/fragment_writing" >
         <action android:id="@+id/action_to_home"
             app:destination="@+id/nav_home"/>
+        <action android:id="@+id/action_to_wrefresh"
+            app:destination="@+id/writingFragment"/>
     </fragment>
 
     <fragment
@@ -77,6 +83,8 @@
         tools:layout="@layout/fragment_multiple_choice" >
         <action android:id="@+id/action_to_home"
             app:destination="@+id/nav_home"/>
+        <action android:id="@+id/action_to_mrefresh"
+            app:destination="@+id/multiplechoiceFragment"/>
     </fragment>
     <fragment
         android:id="@+id/flashcardFragment"
@@ -85,5 +93,18 @@
         tools:layout="@layout/fragment_multiple_choice" >
         <action android:id="@+id/action_to_home"
             app:destination="@+id/nav_home"/>
+        <action android:id="@+id/action_to_frefresh"
+            app:destination="@+id/flashcardFragment"/>
+    </fragment>
+
+    <fragment
+        android:id="@+id/listeningFragment"
+        android:name="kyawthiha.kt.vocabularytrainingforkids.ui.appactivity.ListeningFragment"
+        android:label="Listening"
+        tools:layout="@layout/fragment_listening" >
+        <action android:id="@+id/action_to_home"
+            app:destination="@+id/nav_home"/>
+        <action android:id="@+id/action_to_lrefresh"
+            app:destination="@+id/listeningFragment"/>
     </fragment>
 </navigation>

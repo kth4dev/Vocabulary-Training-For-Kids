@@ -7,6 +7,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 
+import androidx.activity.OnBackPressedCallback;
 import androidx.annotation.NonNull;
 import androidx.cardview.widget.CardView;
 import androidx.fragment.app.Fragment;
@@ -14,12 +15,28 @@ import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
 
 import kyawthiha.kt.vocabularytrainingforkids.R;
+import kyawthiha.kt.vocabularytrainingforkids.custom_dialog.Exit_Dialog;
 import kyawthiha.kt.vocabularytrainingforkids.custom_dialog.Menu_Dialog;
 import kyawthiha.kt.vocabularytrainingforkids.helper.MyHelper;
 
 public class HomeFragment extends Fragment{
 
     private CardView category_fruits,category_animals;
+
+    @Override
+    public void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        OnBackPressedCallback callback = new OnBackPressedCallback(true /* enabled by default */) {
+            @Override
+            public void handleOnBackPressed() {
+                // Handle the back button event
+                Exit_Dialog exit_dialog=new Exit_Dialog(getContext(),getActivity(),  Navigation.findNavController(getView()),0);
+                exit_dialog.show();
+                exit_dialog.setCancelable(false);
+            }
+        };
+        requireActivity().getOnBackPressedDispatcher().addCallback(this, callback);
+    }
 
 
 

@@ -9,6 +9,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.cardview.widget.CardView;
 import androidx.navigation.NavController;
@@ -23,7 +24,7 @@ public class Result_Dialog extends Dialog implements DialogInterface.OnClickList
     String type;
     int question_size;
     private NavController navController;
-    Button btn_gohome;
+    Button btn_gohome,btn_again;
 
     public Result_Dialog(NavController navController,final Context context,int result,int question_size,String type) {
         super(context);
@@ -40,6 +41,8 @@ public class Result_Dialog extends Dialog implements DialogInterface.OnClickList
         setContentView(R.layout.dialog_result);
         TextView finalresult=findViewById(R.id.tv_finalresult);
         TextView tv_hs=findViewById(R.id.tv_highscore);
+        TextView tv_welcome=findViewById(R.id.result_welcome);
+        tv_welcome.setText("Hi, "+MyHelper.getSavingString(c,"USER_NAME"));
         finalresult.setText(finalresult.getText().toString()+result+"/"+question_size);
         String key_name="HS_"+type.toUpperCase();
         String current_hs= MyHelper.getSavingString(c,key_name);
@@ -54,6 +57,29 @@ public class Result_Dialog extends Dialog implements DialogInterface.OnClickList
             public void onClick(View v) {
                 navController.navigate(R.id.action_to_home);
                 dismiss();
+            }
+        });
+        btn_again=findViewById(R.id.btn_playagain);
+        btn_again.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+              Bundle bundle = new Bundle();
+              bundle.putString("category_name", type.substring(1,type.length()));
+              dismiss();
+              if(type.substring(0,1).equalsIgnoreCase("w")){
+                  navController.navigate(R.id.action_to_wrefresh,bundle);
+              }
+              else   if(type.substring(0,1).equalsIgnoreCase("l")){
+                  navController.navigate(R.id.action_to_lrefresh,bundle);
+              }
+              else   if(type.substring(0,1).equalsIgnoreCase("f")){
+                  navController.navigate(R.id.action_to_frefresh,bundle);
+              }
+              else   if(type.substring(0,1).equalsIgnoreCase("m")){
+                  navController.navigate(R.id.action_to_mrefresh,bundle);
+              }
+
+
             }
         });
     }//oncreate

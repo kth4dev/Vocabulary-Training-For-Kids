@@ -7,6 +7,7 @@ import android.content.DialogInterface;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.Toast;
 
 import androidx.cardview.widget.CardView;
 import androidx.core.app.BundleCompat;
@@ -18,7 +19,7 @@ public class Menu_Dialog extends Dialog implements DialogInterface.OnClickListen
     Context c;
     Activity a;
     private NavController navController;
-    private CardView btn_learning,btn_writing,btn_multiplechoice,btn_flashcard;
+    private CardView btn_learning,btn_writing,btn_multiplechoice,btn_flashcard,btn_listening;
     ImageView btn_cancel;
     private String type;
     public Menu_Dialog(final Context context,NavController navController,String type) {
@@ -26,6 +27,7 @@ public class Menu_Dialog extends Dialog implements DialogInterface.OnClickListen
         this.c=context;
         this.navController=navController;
         this.type=type;
+
 
 
 
@@ -39,6 +41,7 @@ public class Menu_Dialog extends Dialog implements DialogInterface.OnClickListen
         btn_writing=findViewById(R.id.btn_writing);
         btn_multiplechoice=findViewById(R.id.btn_multiplechoice);
         btn_flashcard=findViewById(R.id.btn_flashcard);
+        btn_listening=findViewById(R.id.btn_listening);
         btn_cancel=findViewById(R.id.btn_cancel);
         btn_learning.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -80,6 +83,16 @@ public class Menu_Dialog extends Dialog implements DialogInterface.OnClickListen
                 Bundle bundle = new Bundle();
                 bundle.putString("category_name", type);
                 navController.navigate(R.id.action_to_flashcard,bundle);
+            }
+        });
+
+        btn_listening.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                dismiss();
+                Bundle bundle = new Bundle();
+                bundle.putString("category_name", type);
+                navController.navigate(R.id.action_to_listening,bundle);
             }
         });
 

@@ -1,7 +1,10 @@
 package kyawthiha.kt.vocabularytrainingforkids.ui.appactivity;
 
+import android.app.ProgressDialog;
+import android.content.DialogInterface;
 import android.os.Bundle;
 
+import androidx.activity.OnBackPressedCallback;
 import androidx.fragment.app.Fragment;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
@@ -16,19 +19,20 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import java.util.ArrayList;
+import java.util.Collections;
 
 import kyawthiha.kt.vocabularytrainingforkids.R;
+import kyawthiha.kt.vocabularytrainingforkids.custom_dialog.Exit_Dialog;
 import kyawthiha.kt.vocabularytrainingforkids.custom_dialog.Result_Dialog;
 import kyawthiha.kt.vocabularytrainingforkids.data.V_Data;
 import kyawthiha.kt.vocabularytrainingforkids.helper.JsonHelper;
 import kyawthiha.kt.vocabularytrainingforkids.helper.MyHelper;
 
 public class WritingFragment extends Fragment {
-    private TextView tv_ture_score,tv_false_score,tv_meaning,tv_indicator,tv_finalresult;
+    private TextView tv_ture_score,tv_false_score,tv_meaning,tv_indicator;
     private EditText et_answer;
     private Button btn_next;
-    private ImageView iv_question_img;
-    private LinearLayout ll_resultboard;
+    private ImageView iv_question_img,iv_wroung_symbol,iv_correct_symbol;
     private ArrayList<V_Data> question_ary=new ArrayList<>();
 
     private int cuerrent_question=1;
@@ -36,10 +40,22 @@ public class WritingFragment extends Fragment {
     private int true_scorboard=0;
     private int false_scoreboard=0;
     private int question_size=0;
+    private String ctype;
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        ctype=getArguments().getString("category_name");
 
+        OnBackPressedCallback callback = new OnBackPressedCallback(true /* enabled by default */) {
+            @Override
+            public void handleOnBackPressed() {
+                // Handle the back button event
+                Exit_Dialog exit_dialog=new Exit_Dialog(getContext(),getActivity(),  Navigation.findNavController(getView()),1);
+                exit_dialog.show();
+                exit_dialog.setCancelable(false);
+            }
+        };
+        requireActivity().getOnBackPressedDispatcher().addCallback(this, callback);
     }
 
     @Override
@@ -57,6 +73,14 @@ public class WritingFragment extends Fragment {
                 else if(btn_next.getText().toString().equalsIgnoreCase("submit")){
                     submit();
                 }
+                else if(btn_next.getText().toString().equalsIgnoreCase("confirm")){
+                    checkAnswer();
+                    cuerrent_question+=1;
+                    current_index+=1;
+                    if(cuerrent_question==question_size){
+                        btn_next.setText("Submit");
+                    }
+                }
 
             }
         });
@@ -64,61 +88,73 @@ public class WritingFragment extends Fragment {
     }
 
     private void next(){
-        checkAnswer();
-        cuerrent_question+=1;
-        current_index+=1;
-        if(cuerrent_question==question_size){
-            btn_next.setText("Submit");
-        }
-
         insertData();
     }
     private void submit(){
      checkAnswer();
      insertScore();
-     Result_Dialog result_dialog=new Result_Dialog(Navigation.findNavController(getView()),getContext(),true_scorboard,question_size,"Wfruits");
+     Result_Dialog result_dialog=new Result_Dialog(Navigation.findNavController(getView()),getContext(),true_scorboard,question_size,"w"+ctype);
      result_dialog.show();
+     result_dialog.setCancelable(false);
     }
     private void checkAnswer(){
         String user_answer=et_answer.getText().toString();
         String true_ans=question_ary.get(current_index).getTrueAns();
         if(user_answer.equalsIgnoreCase(true_ans)){
             true_scorboard+=1;
+            iv_correct_symbol.setVisibility(View.VISIBLE);
         }
         else{
             false_scoreboard+=1;
+            iv_wroung_symbol.setVisibility(View.VISIBLE);
         }
+        insertScore();
+        btn_next.setText("Next");
+        et_answer.setEnabled(false);
     }
 
     private void setUpUI(View view){
         tv_ture_score=view.findViewById(R.id.tv_ture_score);
         tv_false_score=view.findViewById(R.id.tv_false_score);
         tv_indicator=view.findViewById(R.id.tv_windicator);
+
+        iv_question_img=view.findViewById(R.id.iv_wimg);
+        iv_correct_symbol=view.findViewById(R.id.iv_wcorrect_symbol);
+        iv_wroung_symbol=view.findViewById(R.id.iv_wwrong_symbol);
         tv_meaning=view.findViewById(R.id.tv_wmeaning);
         et_answer=view.findViewById(R.id.et_wanswer);
         btn_next=view.findViewById(R.id.btn_wnext);
-        iv_question_img=view.findViewById(R.id.iv_wimg);
-        tv_finalresult=view.findViewById(R.id.tv_wfinalresult);
-        ll_resultboard=view.findViewById(R.id.ll_wresultboard);
-        question_ary= JsonHelper.getData(getArguments().getString("category_name"),getActivity());
+
+        question_ary= JsonHelper.getData(ctype,getActivity());
+        Collections.shuffle(question_ary);
         question_size=question_ary.size();
         insertData();
+        insertScore();
     }
 
 
     private void insertData(){
-        insertScore();
+        unvisible();
         tv_ture_score.setText(true_scorboard+"");
         tv_false_score.setText(false_scoreboard+"");
         iv_question_img.setImageDrawable(MyHelper.getImageResource(getContext(),question_ary.get(current_index).getTrueAns().toLowerCase()));
         tv_meaning.setText(question_ary.get(current_index).getMeaning());
-        tv_indicator.setText(cuerrent_question+"/"+question_size);
+
         et_answer.setText("");
     }
     private void insertScore(){
         tv_ture_score.setText(true_scorboard+"");
         tv_false_score.setText(false_scoreboard+"");
+        tv_indicator.setText(cuerrent_question+"/"+question_size);
     }
+    private void unvisible(){
+        btn_next.setText("Confirm");
+        iv_correct_symbol.setVisibility(View.GONE);
+        iv_wroung_symbol.setVisibility(View.GONE);
+        et_answer.setEnabled(true);
+
+    }
+
 
 
 

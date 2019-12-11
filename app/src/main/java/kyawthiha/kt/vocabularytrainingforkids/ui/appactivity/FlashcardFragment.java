@@ -4,6 +4,7 @@ import android.content.Context;
 import android.net.Uri;
 import android.os.Bundle;
 
+import androidx.activity.OnBackPressedCallback;
 import androidx.fragment.app.Fragment;
 import androidx.navigation.Navigation;
 
@@ -12,6 +13,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import java.util.ArrayList;
@@ -19,6 +21,7 @@ import java.util.Collections;
 import java.util.List;
 
 import kyawthiha.kt.vocabularytrainingforkids.R;
+import kyawthiha.kt.vocabularytrainingforkids.custom_dialog.Exit_Dialog;
 import kyawthiha.kt.vocabularytrainingforkids.custom_dialog.Result_Dialog;
 import kyawthiha.kt.vocabularytrainingforkids.data.V_Data;
 import kyawthiha.kt.vocabularytrainingforkids.helper.JsonHelper;
@@ -35,7 +38,10 @@ public class FlashcardFragment extends Fragment {
     private  int true_scorboard=0;
     private  int false_scoreboard=0;
     private int question_size=0;
-    private boolean isfinal=false;
+    private String ctype;
+    private ImageView iv_wroung_symbol,iv_correct_symbol;
+    private Button btn_next;
+    private LinearLayout all_btn;
     public FlashcardFragment() {
         // Required empty public constructor
     }
@@ -44,6 +50,17 @@ public class FlashcardFragment extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        ctype=getArguments().getString("category_name");
+        OnBackPressedCallback callback = new OnBackPressedCallback(true /* enabled by default */) {
+            @Override
+            public void handleOnBackPressed() {
+                // Handle the back button event
+                Exit_Dialog exit_dialog=new Exit_Dialog(getContext(),getActivity(),  Navigation.findNavController(getView()),1);
+                exit_dialog.show();
+                exit_dialog.setCancelable(false);
+            }
+        };
+        requireActivity().getOnBackPressedDispatcher().addCallback(this, callback);
 
     }
 
@@ -56,60 +73,62 @@ public class FlashcardFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 String u_ans=place_one.getTag().toString();
-                if(!isfinal){
+
                     next(u_ans);
-                }
-                else {
-                    submit(u_ans);
-                }
+
             }
         });
         place_two.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 String u_ans=place_two.getTag().toString();
-                if(!isfinal){
+
                     next(u_ans);
-                }
-                else {
-                    submit(u_ans);
-                }
+
             }
         });
         place_three.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 String u_ans=place_three.getTag().toString();
-                if(!isfinal){
+
                     next(u_ans);
-                }
-                else {
-                    submit(u_ans);
-                }
+
+
             }
         });
         place_four.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 String u_ans=place_four.getTag().toString();
-                if(!isfinal){
+
                     next(u_ans);
+
+            }
+        });
+
+        btn_next.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(btn_next.getText().toString().equalsIgnoreCase("next")){
+                    insertData();
+                }else{
+                    Result_Dialog result_dialog=new Result_Dialog(Navigation.findNavController(getView()),getContext(),true_scorboard,question_size,"f"+ctype);
+                    result_dialog.show();
+                    result_dialog.setCancelable(false);
                 }
-                else {
-                    submit(u_ans);
-                }
+
             }
         });
         return view;
     }
-    private void submit(String u_ans) {
-        checkAnswer(u_ans);
-        insertScore();
-        Result_Dialog result_dialog=new Result_Dialog(Navigation.findNavController(getView()),getContext(),true_scorboard,question_size,"Ffruits");
-        result_dialog.show();
-    }
+
 
     private void setUpUI(View view){
+        all_btn=view.findViewById(R.id.all_btn_f);
+        btn_next=view.findViewById(R.id.btn_fnext);
+        iv_correct_symbol=view.findViewById(R.id.iv_fcorrect_symbol);
+        iv_wroung_symbol=view.findViewById(R.id.iv_fwrong_symbol);
         tv_ture_score=view.findViewById(R.id.tv_fture_score);
         tv_false_score=view.findViewById(R.id.tv_ffalse_score);
         tv_indicator=view.findViewById(R.id.tv_findicator);
@@ -118,31 +137,40 @@ public class FlashcardFragment extends Fragment {
         place_two=view.findViewById(R.id.iv_two);
         place_three=view.findViewById(R.id.iv_three);
         place_four=view.findViewById(R.id.iv_four);
-        question_ary= JsonHelper.getData(getArguments().getString("category_name"),getActivity());
+        question_ary= JsonHelper.getData(ctype,getActivity());
+        Collections.shuffle(question_ary);
         question_size=question_ary.size();
         insertData();
+        insertScore();
     }
     private void next(String user_ans){
+        all_btn.setVisibility(View.GONE);
+        btn_next.setVisibility(View.VISIBLE);
         checkAnswer(user_ans);
         current_question+=1;
         current_index+=1;
-        if(current_question==question_size){
-            isfinal=true;
-        }
-        insertData();
     }
 
     private void checkAnswer(String user_ans) {
         if(user_ans.equalsIgnoreCase(question_ary.get(current_index).getTrueAns())){
             true_scorboard+=1;
+            iv_correct_symbol.setVisibility(View.VISIBLE);
         }
         else{
             false_scoreboard+=1;
+            iv_wroung_symbol.setVisibility(View.VISIBLE);
         }
+        insertScore();
     }
 
     private void insertData(){
-        insertScore();
+        if(current_question==question_size){
+            btn_next.setText("Submit");
+        }
+        all_btn.setVisibility(View.VISIBLE);
+        btn_next.setVisibility(View.GONE);
+        iv_correct_symbol.setVisibility(View.GONE);
+        iv_wroung_symbol.setVisibility(View.GONE);
         tv_indicator.setText(current_question+"/"+question_size);
         tv_meaning.setText(question_ary.get(current_index).getTrueAns());
         List<String> choices_data=new ArrayList<>() ;
