@@ -38,9 +38,9 @@
 
     <fragment
         android:id="@+id/nav_tools"
-        android:name="kyawthiha.kt.vocabularytrainingforkids.ui.tools.ToolsFragment"
-        android:label="@string/menu_tools"
-        tools:layout="@layout/fragment_tools" />
+        android:name="kyawthiha.kt.vocabularytrainingforkids.ui.about.About"
+        android:label="About"
+        tools:layout="@layout/fragment_about" />
 
     <fragment
         android:id="@+id/nav_share"

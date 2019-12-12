@@ -41,6 +41,7 @@ public class LearningFragment extends Fragment {
             public void handleOnBackPressed() {
                 // Handle the back button event
                 Exit_Dialog exit_dialog=new Exit_Dialog(getContext(),getActivity(),  Navigation.findNavController(getView()),1);
+                exit_dialog.getWindow().setBackgroundDrawableResource(android.R.color.transparent);
                 exit_dialog.show();
                 exit_dialog.setCancelable(false);
             }

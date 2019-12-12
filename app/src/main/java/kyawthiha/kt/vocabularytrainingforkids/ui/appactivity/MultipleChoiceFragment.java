@@ -28,6 +28,8 @@ import kyawthiha.kt.vocabularytrainingforkids.custom_dialog.Result_Dialog;
 import kyawthiha.kt.vocabularytrainingforkids.data.V_Data;
 import kyawthiha.kt.vocabularytrainingforkids.helper.JsonHelper;
 import kyawthiha.kt.vocabularytrainingforkids.helper.MyHelper;
+import me.myatminsoe.mdetect.MDetect;
+import me.myatminsoe.mdetect.Rabbit;
 
 
 public class MultipleChoiceFragment extends Fragment {
@@ -59,6 +61,7 @@ public class MultipleChoiceFragment extends Fragment {
             public void handleOnBackPressed() {
                 // Handle the back button event
                 Exit_Dialog exit_dialog=new Exit_Dialog(getContext(),getActivity(),  Navigation.findNavController(getView()),1);
+                exit_dialog.getWindow().setBackgroundDrawableResource(android.R.color.transparent);
                 exit_dialog.show();
                 exit_dialog.setCancelable(false);
             }
@@ -153,10 +156,12 @@ public class MultipleChoiceFragment extends Fragment {
         if(user_ans.equalsIgnoreCase(question_ary.get(current_index).getTrueAns())){
             true_scorboard+=1;
             iv_correct_symbol.setVisibility(View.VISIBLE);
+            MyHelper.correctSound(getContext());
         }
         else{
             false_scoreboard+=1;
             iv_wroung_symbol.setVisibility(View.VISIBLE);
+            MyHelper.wroungSound(getContext());
         }
         insertScore();
     }
@@ -171,7 +176,11 @@ public class MultipleChoiceFragment extends Fragment {
         iv_wroung_symbol.setVisibility(View.GONE);
         tv_indicator.setText(current_question+"/"+question_size);
         iv_question_img.setImageDrawable(MyHelper.getImageResource(getContext(),question_ary.get(current_index).getTrueAns().toLowerCase()));
-        tv_meaning.setText(question_ary.get(current_index).getMeaning());
+        if(MDetect.INSTANCE.isUnicode()){
+            tv_meaning.setText(question_ary.get(current_index).getMeaning());
+        }else{
+            tv_meaning.setText(Rabbit.uni2zg(question_ary.get(current_index).getMeaning()));
+        }
         List<String> choices_data=new ArrayList<>() ;
         choices_data.add(question_ary.get(current_index).getTrueAns());
         choices_data.add(question_ary.get(current_index).getFalseAns1());

@@ -30,10 +30,31 @@ public class Profile extends AppCompatActivity {
                 }
                 else {
                     MyHelper.saveString(v.getContext(),"USER_NAME",UN);
+
                     MyHelper.saveString(v.getContext(),"HS_WFRUITS","0");
                     MyHelper.saveString(v.getContext(),"HS_LFRUITS","0");
                     MyHelper.saveString(v.getContext(),"HS_FFRUITS","0");
                     MyHelper.saveString(v.getContext(),"HS_MFRUITS","0");
+
+                    MyHelper.saveString(v.getContext(),"HS_WANIMALS","0");
+                    MyHelper.saveString(v.getContext(),"HS_LANIMALS","0");
+                    MyHelper.saveString(v.getContext(),"HS_FANIMALS","0");
+                    MyHelper.saveString(v.getContext(),"HS_MANIMALS","0");
+
+                    MyHelper.saveString(v.getContext(),"HS_WSCHOOL","0");
+                    MyHelper.saveString(v.getContext(),"HS_LSCHOOL","0");
+                    MyHelper.saveString(v.getContext(),"HS_FSCHOOL","0");
+                    MyHelper.saveString(v.getContext(),"HS_MSCHOOL","0");
+
+                    MyHelper.saveString(v.getContext(),"HS_WFOODS","0");
+                    MyHelper.saveString(v.getContext(),"HS_LFOODS","0");
+                    MyHelper.saveString(v.getContext(),"HS_FFOODS","0");
+                    MyHelper.saveString(v.getContext(),"HS_MFOODS","0");
+
+                    MyHelper.saveString(v.getContext(),"HS_WVEHICLES","0");
+                    MyHelper.saveString(v.getContext(),"HS_LVEHICLES","0");
+                    MyHelper.saveString(v.getContext(),"HS_FVEHICLES","0");
+                    MyHelper.saveString(v.getContext(),"HS_MVEHICLES","0");
                     Intent intent = new Intent(Profile.this, MainActivity.class);
                     intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                     startActivity(intent);

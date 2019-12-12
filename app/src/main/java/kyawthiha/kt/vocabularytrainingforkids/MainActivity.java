@@ -26,6 +26,7 @@ import android.widget.Toast;
 
 
 import kyawthiha.kt.vocabularytrainingforkids.helper.MyHelper;
+import me.myatminsoe.mdetect.MDetect;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -35,6 +36,7 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        MDetect.INSTANCE.init(this);
         activity=this;
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);

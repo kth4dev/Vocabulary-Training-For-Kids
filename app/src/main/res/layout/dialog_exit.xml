@@ -23,14 +23,16 @@
     </RelativeLayout>
 
     <TextView
-        android:layout_marginTop="10dp"
+        android:background="@color/white"
+        android:paddingTop="10dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="Do You Want to Exit?"
         android:textSize="@dimen/category_font_size"
         android:gravity="center_horizontal"/>
     <LinearLayout
-        android:layout_marginTop="10dp"
+        android:background="@color/white"
+        android:paddingTop="10dp"
         android:gravity="center"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

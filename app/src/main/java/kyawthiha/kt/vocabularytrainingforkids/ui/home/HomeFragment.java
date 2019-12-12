@@ -21,7 +21,7 @@ import kyawthiha.kt.vocabularytrainingforkids.helper.MyHelper;
 
 public class HomeFragment extends Fragment{
 
-    private CardView category_fruits,category_animals;
+    private CardView category_fruits,category_animals,category_school,category_vehicles,category_foods;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -31,6 +31,7 @@ public class HomeFragment extends Fragment{
             public void handleOnBackPressed() {
                 // Handle the back button event
                 Exit_Dialog exit_dialog=new Exit_Dialog(getContext(),getActivity(),  Navigation.findNavController(getView()),0);
+                exit_dialog.getWindow().setBackgroundDrawableResource(android.R.color.transparent);
                 exit_dialog.show();
                 exit_dialog.setCancelable(false);
             }
@@ -46,6 +47,9 @@ public class HomeFragment extends Fragment{
 
         category_fruits=root.findViewById(R.id.category_fruits);
         category_animals=root.findViewById(R.id.category_animals);
+        category_school=root.findViewById(R.id.category_school);
+        category_foods=root.findViewById(R.id.category_foods);
+
         category_fruits.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -58,6 +62,24 @@ public class HomeFragment extends Fragment{
                 menuDialog(v,"animals");
             }
         });
+        category_school.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                menuDialog(v,"school");
+            }
+        });
+        category_foods.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                menuDialog(v,"foods");
+            }
+        });
+    /*    category_vehicles.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                menuDialog(v,"vehicles");
+            }
+        });*/
         return root;
     }
 

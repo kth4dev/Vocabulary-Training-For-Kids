@@ -1,8 +1,6 @@
 package kyawthiha.kt.vocabularytrainingforkids.ui.appactivity;
 
 import android.app.ProgressDialog;
-import android.content.Context;
-import android.net.Uri;
 import android.os.Bundle;
 
 import androidx.activity.OnBackPressedCallback;
@@ -16,7 +14,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
-import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -26,7 +23,6 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.Locale;
-import java.util.Random;
 
 import kyawthiha.kt.vocabularytrainingforkids.R;
 import kyawthiha.kt.vocabularytrainingforkids.custom_dialog.Exit_Dialog;
@@ -34,6 +30,8 @@ import kyawthiha.kt.vocabularytrainingforkids.custom_dialog.Result_Dialog;
 import kyawthiha.kt.vocabularytrainingforkids.data.V_Data;
 import kyawthiha.kt.vocabularytrainingforkids.helper.JsonHelper;
 import kyawthiha.kt.vocabularytrainingforkids.helper.MyHelper;
+import me.myatminsoe.mdetect.MDetect;
+import me.myatminsoe.mdetect.Rabbit;
 
 
 public class ListeningFragment extends Fragment  implements   TextToSpeech.OnInitListener  {
@@ -66,6 +64,7 @@ public class ListeningFragment extends Fragment  implements   TextToSpeech.OnIni
             public void handleOnBackPressed() {
                 // Handle the back button event
                 Exit_Dialog exit_dialog=new Exit_Dialog(getContext(),getActivity(),  Navigation.findNavController(getView()),1);
+                exit_dialog.getWindow().setBackgroundDrawableResource(android.R.color.transparent);
                 exit_dialog.show();
                 exit_dialog.setCancelable(false);
             }
@@ -95,16 +94,15 @@ public class ListeningFragment extends Fragment  implements   TextToSpeech.OnIni
                 btn_next.setVisibility(View.VISIBLE);
                 if(question_ary.get(current_index).getTrueAns().equals(current_ans)){
                     //increase mark
-                    iv_correct_symbol.setVisibility(View.VISIBLE);
-                    true_scorboard+=1;
-                    insertScore();
+                    true_ans();
                 }else{
-                    iv_wroung_symbol.setVisibility(View.VISIBLE);
-                    false_scoreboard+=1;
-                    insertScore();
+                    wrong_ans();
                 }
-                current_index+=1;
-                current_question+=1;
+                if(current_question==question_size){
+                    btn_next.setText("Submit");
+                }
+
+
 
             }
         });
@@ -115,18 +113,17 @@ public class ListeningFragment extends Fragment  implements   TextToSpeech.OnIni
                 btn_next.setVisibility(View.VISIBLE);
                 if(!question_ary.get(current_index).getTrueAns().equals(current_ans)){
                     //increase mark
-                    iv_correct_symbol.setVisibility(View.VISIBLE);
-
-                    true_scorboard+=1;
-                    insertScore();
+                    true_ans();
                 }else{
-                    iv_wroung_symbol.setVisibility(View.VISIBLE);
-                    false_scoreboard+=1;
-                    insertScore();
 
+                    wrong_ans();
                 }
-                current_index+=1;
-                current_question+=1;
+                if(current_question==question_size){
+                    btn_next.setText("Submit");
+                }
+
+
+
             }
         });
 
@@ -136,14 +133,33 @@ public class ListeningFragment extends Fragment  implements   TextToSpeech.OnIni
                 if(btn_next.getText().toString().equals("Submit")){
                     Result_Dialog result_dialog=new Result_Dialog(Navigation.findNavController(getView()),getContext(),true_scorboard,question_size,"l"+ctype);
                     result_dialog.show();
+                    result_dialog.setCancelable(false);
                 }else{
+                    current_index+=1;
+                    current_question+=1;
                     insertData();
                 }
+
 
             }
         });
 
         return view;
+    }
+    public void wrong_ans(){
+        iv_wroung_symbol.setVisibility(View.VISIBLE);
+        false_scoreboard+=1;
+        MyHelper.wroungSound(getContext());
+        insertScore();
+
+
+    }
+
+    public void true_ans(){
+        iv_correct_symbol.setVisibility(View.VISIBLE);
+        MyHelper.correctSound(getContext());
+        true_scorboard+=1;
+        insertScore();
     }
     private void setUpUI(View view){
         tv_ture_score=view.findViewById(R.id.tv_llture_score);
@@ -174,11 +190,13 @@ public class ListeningFragment extends Fragment  implements   TextToSpeech.OnIni
         btn_next.setVisibility(View.GONE);
         iv_correct_symbol.setVisibility(View.GONE);
         iv_wroung_symbol.setVisibility(View.GONE);
-        if(question_size==current_question){
-            btn_next.setText("Submit");
-        }
+
         iv_question_img.setImageDrawable(MyHelper.getImageResource(getContext(),question_ary.get(current_index).getTrueAns().toLowerCase()));
-        tv_meaning.setText(question_ary.get(current_index).getMeaning());
+        if(MDetect.INSTANCE.isUnicode()){
+            tv_meaning.setText(question_ary.get(current_index).getMeaning());
+        }else{
+            tv_meaning.setText(Rabbit.uni2zg(question_ary.get(current_index).getMeaning()));
+        }
         tv_indicator.setText(current_question+"/"+question_size);
         List<String> choices_data=new ArrayList<>() ;
         choices_data.add(question_ary.get(current_index).getTrueAns());
@@ -189,7 +207,6 @@ public class ListeningFragment extends Fragment  implements   TextToSpeech.OnIni
         int random_num = rand.nextInt(4);*/
         Collections.shuffle(choices_data);
         current_ans=choices_data.get(0);
-        Toast.makeText(getContext(),choices_data.get(0),Toast.LENGTH_SHORT).show();
         speakOut(choices_data.get(0));
 
     }

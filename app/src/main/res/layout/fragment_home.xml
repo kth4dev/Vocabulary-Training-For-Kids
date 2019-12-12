@@ -58,6 +58,7 @@
         android:orientation="horizontal">
 
         <androidx.cardview.widget.CardView
+            android:id="@+id/category_school"
             app:cardCornerRadius="5dp"
             style="@style/category_cardv"
             >
@@ -74,16 +75,58 @@
         </androidx.cardview.widget.CardView>
 
         <androidx.cardview.widget.CardView
+            android:id="@+id/category_vehicle"
             app:cardCornerRadius="5dp"
             style="@style/category_cardv">
             <LinearLayout
                 style="@style/category_inner_linear">
                 <ImageView
+                    android:padding="20dp"
                     style="@style/category_img_style"
-                    android:src="@drawable/animals" />
+                    android:src="@drawable/vehicle" />
                 <TextView
                     style="@style/category_name_style"
-                    android:text="Animals" />
+                    android:text="Vehicle" />
+            </LinearLayout>
+        </androidx.cardview.widget.CardView>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <androidx.cardview.widget.CardView
+            android:id="@+id/category_foods"
+            app:cardCornerRadius="5dp"
+            style="@style/category_cardv"
+            >
+            <LinearLayout
+                style="@style/category_inner_linear">
+
+                <ImageView
+                    style="@style/category_img_style"
+                    android:padding="40dp"
+                    android:src="@drawable/foods" />
+
+                <TextView
+                    style="@style/category_name_style"
+                    android:text="Foods" />
+            </LinearLayout>
+        </androidx.cardview.widget.CardView>
+
+        <androidx.cardview.widget.CardView
+            app:cardCornerRadius="5dp"
+            style="@style/category_cardv">
+            <LinearLayout
+                style="@style/category_inner_linear">
+                <ImageView
+                    android:padding="40dp"
+                    style="@style/category_img_style"
+                    android:src="@drawable/body" />
+                <TextView
+                    style="@style/category_name_style"
+                    android:text="Parts of the body" />
             </LinearLayout>
         </androidx.cardview.widget.CardView>
     </LinearLayout>

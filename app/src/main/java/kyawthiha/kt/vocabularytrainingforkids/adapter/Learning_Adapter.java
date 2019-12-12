@@ -25,6 +25,8 @@ import kyawthiha.kt.vocabularytrainingforkids.R;
 import kyawthiha.kt.vocabularytrainingforkids.data.V_Data;
 import kyawthiha.kt.vocabularytrainingforkids.helper.DataBaseHelper;
 import kyawthiha.kt.vocabularytrainingforkids.helper.MyHelper;
+import me.myatminsoe.mdetect.MDetect;
+import me.myatminsoe.mdetect.Rabbit;
 
 
 public class Learning_Adapter extends RecyclerView.Adapter<Learning_Adapter.ViewHolder> implements   TextToSpeech.OnInitListener  {
@@ -53,7 +55,13 @@ public class Learning_Adapter extends RecyclerView.Adapter<Learning_Adapter.View
             final V_Data cdata=ary.get(i);
             viewHolder.img.setImageDrawable(MyHelper.getImageResource(context,cdata.getTrueAns().toLowerCase()));
             viewHolder.title.setText(cdata.getTrueAns());
+        if(MDetect.INSTANCE.isUnicode()){
             viewHolder.meaning.setText(cdata.getMeaning());
+        }else{
+            viewHolder.meaning.setText(Rabbit.uni2zg(cdata.getMeaning()));
+
+        }
+
             viewHolder.sound.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {

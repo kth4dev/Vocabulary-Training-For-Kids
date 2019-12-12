@@ -2,24 +2,301 @@
   "fruits": [
     {
       "true_ans":"Apple",
-      "meaning":"pan thee",
+      "meaning":"ပန်းသီး",
       "false_ans_1": "Orange",
-      "false_ans_2": "Animals",
-      "false_ans_3": "Fruits"
+      "false_ans_2": "Coconut",
+      "false_ans_3": "Banana"
     },
     {
       "true_ans":"Orange",
-      "meaning":"lainmaw thee",
-      "false_ans_1": "Schoolsuplies",
-      "false_ans_2": "Animals",
+      "meaning":"လိမ္မော်သီး",
+      "false_ans_1": "Garlic",
+      "false_ans_2": "Fig",
       "false_ans_3": "Apple"
     },
     {
-      "true_ans":"Animals",
-      "meaning":"ta yait san",
+      "true_ans":"Banana",
+      "meaning":"ငှက်ပျောသီး",
+      "false_ans_1": "Acorn",
+      "false_ans_2": "Coconut",
+      "false_ans_3": "Fig"
+    }
+  ,
+    {
+      "true_ans":"Coconut",
+      "meaning":"အုန်းသီး",
       "false_ans_1": "Orange",
-      "false_ans_2": "Fruits",
+      "false_ans_2": "Almond",
+      "false_ans_3": "Apple"
+    },
+    {
+      "true_ans":"Fig",
+      "meaning":"သဖန်းသီး",
+      "false_ans_1": "Garlic",
+      "false_ans_2": "Cucumber",
+      "false_ans_3": "Apple"
+    },
+    {
+      "true_ans":"Garlic",
+      "meaning":"ကြက်သွန်ဖြူ",
+      "false_ans_1": "Acorn",
+      "false_ans_2": "Coconut",
+      "false_ans_3": "Orange"
+    }
+  ,
+    {
+      "true_ans":"Avocado",
+      "meaning":"ထောပတ်သီး",
+      "false_ans_1": "Fig",
+      "false_ans_2": "Almond",
+      "false_ans_3": "Banana"
+    },
+    {
+      "true_ans":"Cucumber",
+      "meaning":"သခွားသီး",
+      "false_ans_1": "Garlic",
+      "false_ans_2": "Fig",
+      "false_ans_3": "Apple"
+    },
+    {
+      "true_ans":"Acorn",
+      "meaning":"ဝက်သစ်ချသီး",
+      "false_ans_1": "Banana",
+      "false_ans_2": "Coconut",
+      "false_ans_3": "Orange"
+    }
+  ,
+    {
+      "true_ans":"Almond",
+      "meaning":"မက်မွန်သီး",
+      "false_ans_1": "Garlic",
+      "false_ans_2": "Avocado",
       "false_ans_3": "Apple"
     }
-          ]
+  ],
+  "animals": [
+    {
+      "true_ans":"Ant",
+      "meaning":"ပုရွက်ဆိတ်",
+      "false_ans_1": "Crab",
+      "false_ans_2": "Crow",
+      "false_ans_3": "Elephant"
+    },
+    {
+      "true_ans":"Chicken",
+      "meaning":"ကြက်",
+      "false_ans_1": "Deer",
+      "false_ans_2": "Penguin",
+      "false_ans_3": "Crocodile"
+    },
+    {
+      "true_ans":"Cow",
+      "meaning":"နွား",
+      "false_ans_1": "Crow",
+      "false_ans_2": "Ant",
+      "false_ans_3": "Fish"
+    }
+  ,
+    {
+      "true_ans":"Crab",
+      "meaning":"ပုဇွန်လုံး",
+      "false_ans_1": "Deer",
+      "false_ans_2": "Penguin",
+      "false_ans_3": "Cow"
+    },
+    {
+      "true_ans":"Crocodile",
+      "meaning":"မိကျောင်း",
+      "false_ans_1": "Crow",
+      "false_ans_2": "Crab",
+      "false_ans_3": "Cow"
+    },
+    {
+      "true_ans":"Crow",
+      "meaning":"ကျီးကန်း",
+      "false_ans_1": "Ant",
+      "false_ans_2": "Chicken",
+      "false_ans_3": "Deer"
+    }
+  ,
+    {
+      "true_ans":"Deer",
+      "meaning":"ဒရယ်",
+      "false_ans_1": "Fish",
+      "false_ans_2": "Elephant",
+      "false_ans_3": "Crab"
+    },
+    {
+      "true_ans":"Elephant",
+      "meaning":"ဆင်",
+      "false_ans_1": "Penguin",
+      "false_ans_2": "Crocodile",
+      "false_ans_3": "Cow"
+    },
+    {
+      "true_ans":"Fish",
+      "meaning":"ငါး",
+      "false_ans_1": "Penguin",
+      "false_ans_2": "Ant",
+      "false_ans_3": "Elephant"
+    }
+  ,
+    {
+      "true_ans":"Penguin",
+      "meaning":"ပင်ဂွင်ငှက်",
+      "false_ans_1": "Crab",
+      "false_ans_2": "Chicken",
+      "false_ans_3": "Ant"
+    }
+  ],
+    "school": [
+    {
+      "true_ans":"Backpack",
+      "meaning":"ကျောပိုးအိတ်",
+      "false_ans_1": "Pencil",
+      "false_ans_2": "Chalkboard",
+      "false_ans_3": "Desk"
+    },
+    {
+      "true_ans":"Calculator",
+      "meaning":"ဂဏာန်းတွက်စက်",
+      "false_ans_1": "Computer",
+      "false_ans_2": "Globe",
+      "false_ans_3": "Magnet"
+    },
+    {
+      "true_ans":"Chair",
+      "meaning":"ကုလားထိုင်",
+      "false_ans_1": "Chalkboard",
+      "false_ans_2": "Eraser",
+      "false_ans_3": "Desk"
+    }
+  ,
+    {
+      "true_ans":"Chalkboard",
+      "meaning":"ကျောက်သင်ပုန်း",
+      "false_ans_1": "Computer",
+      "false_ans_2": "Calculator",
+      "false_ans_3": "Globe"
+    },
+    {
+      "true_ans":"Computer",
+      "meaning":"ကွန်ပျူတာ",
+      "false_ans_1": "Desk",
+      "false_ans_2": "Eraser",
+      "false_ans_3": "Magnet"
+    },
+    {
+      "true_ans":"Desk",
+      "meaning":"စာရေးစားပွဲ",
+      "false_ans_1": "Chair",
+      "false_ans_2": "Eraser",
+      "false_ans_3": "Backpack"
+    }
+  ,
+    {
+      "true_ans":"Eraser",
+      "meaning":"ခဲဖျက်",
+      "false_ans_1": "Globe",
+      "false_ans_2": "Pencil",
+      "false_ans_3": "Chalkboard"
+    },
+    {
+      "true_ans":"Globe",
+      "meaning":"ကမ္ဘာလုံး",
+      "false_ans_1": "Computer",
+      "false_ans_2": "Pencil",
+      "false_ans_3": "chair"
+    },
+    {
+      "true_ans":"Magnet",
+      "meaning":"သံလိုက်",
+      "false_ans_1": "Pencil",
+      "false_ans_2": "Backpack",
+      "false_ans_3": "Calculator"
+    }
+  ,
+    {
+      "true_ans":"Pencil",
+      "meaning":"ခဲတံ",
+      "false_ans_1": "Computer",
+      "false_ans_2": "Eraser",
+      "false_ans_3": "Magnet"
+    }
+  ],
+  "foods": [
+    {
+      "true_ans":"Bagel",
+      "meaning":"ပေါင်မုန့်အကွင်း",
+      "false_ans_1": "Pizza",
+      "false_ans_2": "Hamburger",
+      "false_ans_3": "Bakedbeans"
+    },
+    {
+      "true_ans":"Bakedbeans",
+      "meaning":"ပဲစိမ်းဘူး",
+      "false_ans_1": "Bagel",
+      "false_ans_2": "Pizza",
+      "false_ans_3": "Hamburger"
+    },
+    {
+      "true_ans":"Cake",
+      "meaning":"ကိတ်မုန့်",
+      "false_ans_1": "Donut",
+      "false_ans_2": "Pizza",
+      "false_ans_3": "Bagel"
+    }
+  ,
+    {
+      "true_ans":"Coffee",
+      "meaning":"ကော်ဖီ",
+      "false_ans_1": "Milkshake",
+      "false_ans_2": "Icecream",
+      "false_ans_3": "Donut"
+    },
+    {
+      "true_ans":"Donut",
+      "meaning":"ဒိုးနတ်",
+      "false_ans_1": "Pizza",
+      "false_ans_2": "Cake",
+      "false_ans_3": "Bagel"
+    },
+    {
+      "true_ans":"Egg",
+      "meaning":"ကြက်ဥ",
+      "false_ans_1": "Bagel",
+      "false_ans_2": "Bakedbeans",
+      "false_ans_3": "Icecream"
+    }
+  ,
+    {
+      "true_ans":"Hamburger",
+      "meaning":"အသားညှပ်ပေါင်မုန့်ဝိုင်",
+      "false_ans_1": "Donut",
+      "false_ans_2": "Bagel",
+      "false_ans_3": "Bakedbeans"
+    },
+    {
+      "true_ans":"Icecream",
+      "meaning":"ရေခဲမုန့်",
+      "false_ans_1": "Coffee",
+      "false_ans_2": "Milkshake",
+      "false_ans_3": "Cake"
+    },
+    {
+      "true_ans":"Milkshake",
+      "meaning":"နို့မလိုင်ဖျော်ရည်",
+      "false_ans_1": "Coffee",
+      "false_ans_2": "Egg",
+      "false_ans_3": "Bakedbeans"
+    }
+  ,
+    {
+      "true_ans":"Pizza",
+      "meaning":"ပီစာမုန့်",
+      "false_ans_1": "Donut",
+      "false_ans_2": "Bagel",
+      "false_ans_3": "Hamburger"
+    }
+  ]
 }

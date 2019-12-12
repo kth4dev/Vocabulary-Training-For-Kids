@@ -6,6 +6,7 @@
     android:layout_height="wrap_content"
     android:paddingBottom="7dp">
         <TextView
+            android:id="@+id/tv_categoryname_hs"
             android:background="@color/colorPrimary"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -47,6 +48,7 @@
                         android:layout_centerVertical="true"
                         android:orientation="vertical">
                         <TextView
+                            android:id="@+id/tv_whs"
                             android:textStyle="bold"
                             android:textColor="@color/white"
                             android:textSize="@dimen/category_font_size"
@@ -101,6 +103,7 @@
                         android:layout_centerVertical="true"
                         android:orientation="vertical">
                         <TextView
+                            android:id="@+id/tv_lhs"
                             android:textStyle="bold"
                             android:textColor="@color/white"
                             android:textSize="@dimen/category_font_size"
@@ -162,6 +165,7 @@
                         android:layout_centerVertical="true"
                         android:orientation="vertical">
                         <TextView
+                            android:id="@+id/tv_fhs"
                             android:textStyle="bold"
                             android:textColor="@color/white"
                             android:textSize="@dimen/category_font_size"
@@ -215,6 +219,7 @@
                         android:layout_centerVertical="true"
                         android:orientation="vertical">
                         <TextView
+                            android:id="@+id/tv_mhs"
                             android:textStyle="bold"
                             android:textColor="@color/white"
                             android:textSize="@dimen/category_font_size"

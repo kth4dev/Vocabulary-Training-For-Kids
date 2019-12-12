@@ -56,7 +56,9 @@ public class FlashcardFragment extends Fragment {
             public void handleOnBackPressed() {
                 // Handle the back button event
                 Exit_Dialog exit_dialog=new Exit_Dialog(getContext(),getActivity(),  Navigation.findNavController(getView()),1);
+                exit_dialog.getWindow().setBackgroundDrawableResource(android.R.color.transparent);
                 exit_dialog.show();
+
                 exit_dialog.setCancelable(false);
             }
         };
@@ -155,10 +157,12 @@ public class FlashcardFragment extends Fragment {
         if(user_ans.equalsIgnoreCase(question_ary.get(current_index).getTrueAns())){
             true_scorboard+=1;
             iv_correct_symbol.setVisibility(View.VISIBLE);
+            MyHelper.correctSound(getContext());
         }
         else{
             false_scoreboard+=1;
             iv_wroung_symbol.setVisibility(View.VISIBLE);
+            MyHelper.wroungSound(getContext());
         }
         insertScore();
     }

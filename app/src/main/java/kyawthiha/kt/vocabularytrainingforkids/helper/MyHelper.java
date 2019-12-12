@@ -4,6 +4,11 @@ import android.content.Context;
 import android.content.SharedPreferences;
 import android.content.res.Resources;
 import android.graphics.drawable.Drawable;
+import android.media.MediaPlayer;
+
+import java.util.Collections;
+
+import kyawthiha.kt.vocabularytrainingforkids.R;
 
 import static android.content.Context.MODE_PRIVATE;
 
@@ -26,5 +31,13 @@ public class MyHelper {
         SharedPreferences.Editor editor = sharedPreferences.edit();
         editor.putString(key,value);
         editor.commit();
+    }
+    public static void wroungSound(Context context){
+        MediaPlayer mp = MediaPlayer.create(context, R.raw.wrong);
+        mp.start();
+    }
+    public static void correctSound(Context context){
+        MediaPlayer mp = MediaPlayer.create(context, R.raw.correct);
+        mp.start();
     }
 }

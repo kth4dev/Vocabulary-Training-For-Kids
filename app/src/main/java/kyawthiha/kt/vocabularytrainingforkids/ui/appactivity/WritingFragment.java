@@ -27,6 +27,8 @@ import kyawthiha.kt.vocabularytrainingforkids.custom_dialog.Result_Dialog;
 import kyawthiha.kt.vocabularytrainingforkids.data.V_Data;
 import kyawthiha.kt.vocabularytrainingforkids.helper.JsonHelper;
 import kyawthiha.kt.vocabularytrainingforkids.helper.MyHelper;
+import me.myatminsoe.mdetect.MDetect;
+import me.myatminsoe.mdetect.Rabbit;
 
 public class WritingFragment extends Fragment {
     private TextView tv_ture_score,tv_false_score,tv_meaning,tv_indicator;
@@ -51,6 +53,7 @@ public class WritingFragment extends Fragment {
             public void handleOnBackPressed() {
                 // Handle the back button event
                 Exit_Dialog exit_dialog=new Exit_Dialog(getContext(),getActivity(),  Navigation.findNavController(getView()),1);
+                exit_dialog.getWindow().setBackgroundDrawableResource(android.R.color.transparent);
                 exit_dialog.show();
                 exit_dialog.setCancelable(false);
             }
@@ -68,6 +71,8 @@ public class WritingFragment extends Fragment {
             public void onClick(View v) {
 
                 if(btn_next.getText().toString().equalsIgnoreCase("next")){
+                    current_index+=1;
+                    cuerrent_question+=1;
                     next();
                 }
                 else if(btn_next.getText().toString().equalsIgnoreCase("submit")){
@@ -75,11 +80,13 @@ public class WritingFragment extends Fragment {
                 }
                 else if(btn_next.getText().toString().equalsIgnoreCase("confirm")){
                     checkAnswer();
-                    cuerrent_question+=1;
-                    current_index+=1;
                     if(cuerrent_question==question_size){
                         btn_next.setText("Submit");
                     }
+
+
+
+
                 }
 
             }
@@ -91,8 +98,6 @@ public class WritingFragment extends Fragment {
         insertData();
     }
     private void submit(){
-     checkAnswer();
-     insertScore();
      Result_Dialog result_dialog=new Result_Dialog(Navigation.findNavController(getView()),getContext(),true_scorboard,question_size,"w"+ctype);
      result_dialog.show();
      result_dialog.setCancelable(false);
@@ -103,10 +108,12 @@ public class WritingFragment extends Fragment {
         if(user_answer.equalsIgnoreCase(true_ans)){
             true_scorboard+=1;
             iv_correct_symbol.setVisibility(View.VISIBLE);
+            MyHelper.correctSound(getContext());
         }
         else{
             false_scoreboard+=1;
             iv_wroung_symbol.setVisibility(View.VISIBLE);
+            MyHelper.wroungSound(getContext());
         }
         insertScore();
         btn_next.setText("Next");
@@ -134,11 +141,18 @@ public class WritingFragment extends Fragment {
 
 
     private void insertData(){
+        insertScore();
         unvisible();
         tv_ture_score.setText(true_scorboard+"");
         tv_false_score.setText(false_scoreboard+"");
         iv_question_img.setImageDrawable(MyHelper.getImageResource(getContext(),question_ary.get(current_index).getTrueAns().toLowerCase()));
-        tv_meaning.setText(question_ary.get(current_index).getMeaning());
+       if(MDetect.INSTANCE.isUnicode()){
+           tv_meaning.setText(question_ary.get(current_index).getMeaning());
+       }else{
+           tv_meaning.setText(Rabbit.uni2zg(question_ary.get(current_index).getMeaning()));
+       }
+
+
 
         et_answer.setText("");
     }
